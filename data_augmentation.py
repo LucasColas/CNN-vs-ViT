@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import Dataset, Subset
 from torchvision.transforms import v2
-
+import torchvision.transforms as transforms
 
 class UpdateLabelsMNSIT(Dataset):
   def __init__(self, dataset, labels_shift):
@@ -25,19 +25,26 @@ class AugmentedMNIST(Dataset):
     return len(self.dataset) + len(self.augmented_retina_list)
 
   def __getitem__(self, idx):
+    
+    to_tensor = transforms.ToTensor()
     if idx < len(self.dataset):
-      image, label = self.dataset[idx]
+       image, label = self.dataset[idx]
     else:
-      image, label = self.augmented_retina_list[idx - len(self.dataset)]
-
+       image, label = self.augmented_retina_list[idx - len(self.dataset)]
+    if not isinstance(image, torch.Tensor):
+      image = to_tensor(image)
     return image, label
+
 
 def ApplyTransformation(dataset, transformation):
   augmented_data_list = []
-
+  to_tensor = transforms.ToTensor()
   for i in range(len(dataset)):
     img = dataset[i][0]
     label = dataset[i][1]
+    if not isinstance(img, torch.Tensor):
+      img = to_tensor(img)
+        
 
     img = transformation(img)
     augmented_data_list.append([img, label])
