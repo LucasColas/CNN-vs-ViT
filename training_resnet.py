@@ -31,6 +31,7 @@ blood_dataset = BloodMNIST(split="train", download=True)
 retina_dataset = OCTMNIST(split="train", download=True)  # Using OCTMNIST as retina dataset
 
 # Concatenate and augment datasets
+print("Concatenating and augmenting datasets...")
 full_dataset = ConcatDataset(path_dataset, derma_dataset, blood_dataset, retina_dataset)
 dataset_size = len(full_dataset)
 print(f"Total dataset size after augmentation: {dataset_size}")
@@ -40,6 +41,7 @@ train_size = int(0.7 * dataset_size)
 val_size = int(0.1 * dataset_size)
 test_size = dataset_size - train_size - val_size
 
+print("Splitting dataset into train, validation, and test sets...")
 train_dataset, val_dataset, test_dataset = random_split(full_dataset, [train_size, val_size, test_size])
 print(f"Train: {len(train_dataset)} | Validation: {len(val_dataset)} | Test: {len(test_dataset)}")
 
@@ -61,6 +63,7 @@ results_summary = []
 # -------------------
 # Begin grid search over hyperparameter combinations.
 config_counter = 0
+print("Everything is good. Start your engine!")
 for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in itertools.product(
         grid_params["num_epochs"],
         grid_params["lr"],

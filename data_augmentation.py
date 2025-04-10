@@ -3,6 +3,12 @@ from torch.utils.data import Dataset, Subset
 from torchvision.transforms import v2
 import torchvision.transforms as transforms
 
+
+def ensure_three_channels(img: torch.Tensor) -> torch.Tensor:
+    if img.shape[0] == 1:
+        img = img.expand(3, img.shape[1], img.shape[2])
+    return img
+
 class UpdateLabelsMNSIT(Dataset):
   def __init__(self, dataset, labels_shift):
     self.dataset = dataset
@@ -14,6 +20,10 @@ class UpdateLabelsMNSIT(Dataset):
   def __getitem__(self, idx):
     image, label = self.dataset[idx]
     label = label + self.labels_shift
+    to_tensor = transforms.ToTensor()
+    if not isinstance(image, torch.Tensor):
+        image = to_tensor(image)
+    image = ensure_three_channels(image)
     return image, label
 
 class AugmentedMNIST(Dataset):
@@ -33,6 +43,8 @@ class AugmentedMNIST(Dataset):
        image, label = self.augmented_retina_list[idx - len(self.dataset)]
     if not isinstance(image, torch.Tensor):
       image = to_tensor(image)
+
+    image = ensure_three_channels(image)
     return image, label
 
 
@@ -45,9 +57,10 @@ def ApplyTransformation(dataset, transformation):
     if not isinstance(img, torch.Tensor):
       img = to_tensor(img)
         
-
+    img = ensure_three_channels(img)
     img = transformation(img)
-    augmented_data_list.append([img, label])
+    img = ensure_three_channels(img)
+    augmented_data_list.append((img, label))
 
   return AugmentedMNIST(dataset, augmented_data_list)
 
