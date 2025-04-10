@@ -65,7 +65,7 @@ class CustomResNet(nn.Module):
                  kernel_size=3,         # Kernel size for convolutions
                  activation=nn.ReLU(inplace=True),  # Activation function
                  use_batchnorm=True,    # Whether to use BatchNorm
-                 num_classes=10         # Number of classes for final output
+                 num_classes=28         # Number of classes for final output
                  ):
         super(CustomResNet, self).__init__()
 

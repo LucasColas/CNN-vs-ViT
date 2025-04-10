@@ -55,7 +55,7 @@ grid_params = {
     "kernel_size": [3, 5]
 }
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 criterion = nn.CrossEntropyLoss()
 
 results_summary = []
@@ -63,6 +63,7 @@ results_summary = []
 # -------------------
 # Begin grid search over hyperparameter combinations.
 config_counter = 0
+num_classes = 28
 print("Everything is good. Start your engine!")
 for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in itertools.product(
         grid_params["num_epochs"],
@@ -91,7 +92,7 @@ for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in iter
 
     # Initialize model with current hyperparameters.
     model = CustomResNet(in_channels=3, num_blocks=num_blocks, base_channels=base_channels,
-                         kernel_size=kernel_size, num_classes=10).to(device)
+                         kernel_size=kernel_size, num_classes=num_classes).to(device)
     optimizer = optim.Adam(model.parameters(), lr=lr)
 
     # Lists to track accuracy (and loss if desired) for each epoch.
@@ -106,9 +107,11 @@ for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in iter
         total_train = 0
 
         for images, labels in train_loader:
-            images, labels = images.to(device), labels.to(device).long()
+            images, labels = images.to(device), labels.to(device)
+            labels = labels.squeeze()  # Ensure labels are of shape [batch_size]
             optimizer.zero_grad()
             outputs = model(images)
+            print(labels.shape)
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
@@ -129,7 +132,8 @@ for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in iter
         total_val = 0
         with torch.no_grad():
             for images, labels in val_loader:
-                images, labels = images.to(device), labels.to(device).long()
+                images, labels = images.to(device), labels.to(device)
+                labels = labels.squeeze()  # Ensure labels are of shape [batch_size]
                 outputs = model(images)
                 _, predicted = torch.max(outputs, 1)
                 total_val += labels.size(0)
@@ -150,7 +154,8 @@ for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in iter
     total_test = 0
     with torch.no_grad():
         for images, labels in test_loader:
-            images, labels = images.to(device), labels.to(device).long()
+            images, labels = images.to(device), labels.to(device)
+            labels = labels.squeeze()  # Ensure labels are of shape [batch_size]
             outputs = model(images)
             _, predicted = torch.max(outputs, 1)
             total_test += labels.size(0)

@@ -99,11 +99,10 @@ def ConcatDataset(path_dataset, derma_dataset, blood_dataset, retina_dataset):
     RETINA_LABELS_SHIFT = 24
     
     subset_count = torch.arange(1080)
-
+    print("Concatenating datasets")
     path_subset_dataset = Subset(path_dataset, subset_count)
     blood_subset_dataset = Subset(blood_dataset, subset_count)
     derma_subset_dataset = Subset(derma_dataset, subset_count)
-
     updated_derma_dataset = UpdateLabelsMNSIT(derma_subset_dataset, DERMA_LABELS_SHIFT)
     updated_blood_dataset = UpdateLabelsMNSIT(blood_subset_dataset, BLOOD_LABELS_SHIFT)
     updated_retina_dataset = UpdateLabelsMNSIT(retina_dataset, RETINA_LABELS_SHIFT)
