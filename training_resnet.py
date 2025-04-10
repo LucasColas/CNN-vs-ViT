@@ -55,7 +55,7 @@ grid_params = {
     "kernel_size": [3, 5]
 }
 
-device = torch.device("cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 criterion = nn.CrossEntropyLoss()
 
 results_summary = []
@@ -111,7 +111,7 @@ for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in iter
             labels = labels.squeeze()  # Ensure labels are of shape [batch_size]
             optimizer.zero_grad()
             outputs = model(images)
-            print(labels.shape)
+            
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
