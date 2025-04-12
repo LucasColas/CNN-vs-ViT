@@ -14,7 +14,7 @@ import json
 
 import os
 
-from medmnist import PathMNIST, DermaMNIST, BloodMNIST, OCTMNIST
+from medmnist import PathMNIST, DermaMNIST, BloodMNIST, RetinaMNIST
 
 from data_augmentation import *
 from resnet import CustomResNet
@@ -25,10 +25,10 @@ os.makedirs("models", exist_ok=True)
 
 # Download datasets using MedMNIST.
 print("Downloading datasets...")
-path_dataset = PathMNIST(split="train", download=True)
-derma_dataset = DermaMNIST(split="train", download=True)
-blood_dataset = BloodMNIST(split="train", download=True)
-retina_dataset = OCTMNIST(split="train", download=True)  # Using OCTMNIST as retina dataset
+path_dataset = PathMNIST(split="train", download=True, as_rgb = True)
+derma_dataset = DermaMNIST(split="train", download=True, as_rgb = True)
+blood_dataset = BloodMNIST(split="train", download=True, as_rgb = True)
+retina_dataset = RetinaMNIST(split="train", download=True, as_rgb= True) 
 
 # Concatenate and augment datasets
 print("Concatenating and augmenting datasets...")
