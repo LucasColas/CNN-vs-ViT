@@ -54,8 +54,9 @@ grid_params = {
     "base_channels": [32, 64],
     "kernel_size": [3, 5]
 }
-
+#"cuda" if torch.cuda.is_available() else
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
 criterion = nn.CrossEntropyLoss()
 
 results_summary = []
@@ -63,7 +64,7 @@ results_summary = []
 # -------------------
 # Begin grid search over hyperparameter combinations.
 config_counter = 0
-num_classes = 28
+num_classes = 29
 print("Everything is good. Start your engine!")
 for (num_epochs, lr, batch_size, num_blocks, base_channels, kernel_size) in itertools.product(
         grid_params["num_epochs"],
