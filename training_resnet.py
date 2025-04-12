@@ -190,7 +190,7 @@ with open("grid_search_summary.json", "w") as f:
 print("\nSaved grid search summary to grid_search_summary.json")
 
 # Sort results in descending order by best validation accuracy
-results_summary_sorted = sorted(results_summary, key=lambda x: x["best_val_acc"], reverse=True)
+results_summary_sorted = sorted(results_summary, key=lambda x: x["test_acc"], reverse=True)
 best_result = results_summary_sorted[0]
 
 print("\nBest hyperparameter configuration:")
