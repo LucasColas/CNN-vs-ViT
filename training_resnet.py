@@ -1,3 +1,7 @@
+from medmnist import PathMNIST, DermaMNIST, BloodMNIST, RetinaMNIST
+
+print("import modules")
+
 import os
 import itertools
 import torch
@@ -9,30 +13,36 @@ import torchvision.transforms as transforms
 from torchvision.transforms import v2
 import numpy as np
 import matplotlib.pyplot as plt
-import wandb  # For optional experiment tracking/logging
 import json
-
+from sklearn.metrics import precision_score, recall_score, f1_score
 import os
 
-from medmnist import PathMNIST, DermaMNIST, BloodMNIST, RetinaMNIST
+
 
 from data_augmentation import *
 from resnet import CustomResNet
+print("modules imported")
 
-os.makedirs("saved_models", exist_ok=True)
-os.makedirs("plots", exist_ok=True)
-os.makedirs("models", exist_ok=True)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("device:", device)
+
+path_dataset = PathMNIST(split="train", download=False, as_rgb = True)
+derma_dataset = DermaMNIST(split="train", download=False, as_rgb = True)
+blood_dataset = BloodMNIST(split="train", download=False, as_rgb = True)
+retina_dataset = RetinaMNIST(split="train", download=False, as_rgb= True) 
+
+os.makedirs("saved_models_2", exist_ok=True)
+os.makedirs("plots_2", exist_ok=True)
+os.makedirs("models_2", exist_ok=True)
 
 # Download datasets using MedMNIST.
-print("Downloading datasets...")
-path_dataset = PathMNIST(split="train", download=True, as_rgb = True)
-derma_dataset = DermaMNIST(split="train", download=True, as_rgb = True)
-blood_dataset = BloodMNIST(split="train", download=True, as_rgb = True)
-retina_dataset = RetinaMNIST(split="train", download=True, as_rgb= True) 
+#print("Downloading datasets...")
+
 
 # Concatenate and augment datasets
 print("Concatenating and augmenting datasets...")
-full_dataset = ConcatDataset(path_dataset, derma_dataset, blood_dataset, retina_dataset)
+full_dataset = ConcatDataset(path_dataset, derma_dataset, blood_dataset, retina_dataset, 1080)
+full_dataset = DatasetAugmentation(full_dataset)
 dataset_size = len(full_dataset)
 print(f"Total dataset size after augmentation: {dataset_size}")
 
@@ -47,16 +57,28 @@ print(f"Train: {len(train_dataset)} | Validation: {len(val_dataset)} | Test: {le
 
 # Define grid search hyperparameters
 grid_params = {
-    "num_epochs": [3, 5],
-    "lr": [0.001, 0.0005],
+    "num_epochs": [10, 20, 30, 40],
+    "lr": [0.001, 0.0001, 0.0005],
     "batch_size": [32, 64],
-    "num_blocks": [3, 5, 10],
+    "num_blocks": [10, 12, 15, 34],
     "base_channels": [32, 64],
     "kernel_size": [3, 5]
 }
-#"cuda" if torch.cuda.is_available() else
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Using device: {device}")
+"""
+grid_params = {
+    "num_epochs": [20, 30, 50],
+    "lr": [0.01, 0.001, 0.0001],
+    "batch_size": [32, 64, 128],
+    "num_blocks": [34, 50, 102],
+    "base_channels": [32, 64],
+    "kernel_size": [3, 5]
+}
+"""
+
+
+
+
+
 criterion = nn.CrossEntropyLoss()
 
 results_summary = []
@@ -199,14 +221,63 @@ print(best_result["params"])
 print(f"Best validation accuracy: {best_result['best_val_acc']} at epoch {best_result['best_epoch']+1}")
 print(f"Test accuracy for best config: {best_result['test_acc']}")
 
+
+# Reload the best model.
+best_model = CustomResNet(
+    in_channels=3, 
+    num_blocks=best_result["params"]["num_blocks"], 
+    base_channels=best_result["params"]["base_channels"],
+    kernel_size=best_result["params"]["kernel_size"], 
+    num_classes=num_classes
+).to(device)
+best_model.load_state_dict(torch.load(best_result["last_model_path"]))
+best_model.eval()
+
+all_preds = []
+all_true = []
+top5_correct = 0
+total_samples = 0
+
+with torch.no_grad():
+    for images, labels in test_loader:
+        images, labels = images.to(device), labels.to(device)
+        labels = labels.squeeze()  # Ensure labels are 1D
+        outputs = best_model(images)
+        # Top-1 prediction.
+        _, pred = torch.max(outputs, 1)
+        all_preds.extend(pred.cpu().numpy())
+        all_true.extend(labels.cpu().numpy())
+        # Top-5 prediction.
+        top5 = torch.topk(outputs, k=5, dim=1).indices
+        for i in range(labels.size(0)):
+            if labels[i] in top5[i]:
+                top5_correct += 1
+        total_samples += labels.size(0)
+
+top1_acc = np.mean(np.array(all_preds) == np.array(all_true))
+top5_acc = top5_correct / total_samples
+
+precision = precision_score(all_true, all_preds, average='macro')
+recall = recall_score(all_true, all_preds, average='macro')
+f1 = f1_score(all_true, all_preds, average='macro')
+
+print("\nAdditional Metrics on Best Model:")
+print(f"Top-1 Accuracy: {top1_acc:.4f}")
+print(f"Top-5 Accuracy: {top5_acc:.4f}")
+print(f"Precision (macro): {precision:.4f}")
+print(f"Recall (macro): {recall:.4f}")
+print(f"F1-Score (macro): {f1:.4f}")
+
 # -------------------
 # Plot validation accuracy evolution for the best model and save the plot.
 plt.figure(figsize=(8, 6))
 epochs = range(1, len(best_result["val_accuracies"]) + 1)
+# convert to percentage
+best_result["val_accuracies"] = [acc * 100 for acc in best_result["val_accuracies"]]
 plt.plot(epochs, best_result["val_accuracies"], label="Validation Accuracy", marker='o')
 plt.title("Validation Accuracy Over Epochs (Best Model)")
 plt.xlabel("Epoch")
-plt.ylabel("Accuracy")
+plt.ylabel("Accuracy (%)")
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
