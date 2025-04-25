@@ -9,7 +9,7 @@ torch
 torchvision
 numpy
 matplotlib
-sklearn
+scikit-learn
 transformers
 wandb
 evaluate
