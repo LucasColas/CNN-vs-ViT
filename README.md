@@ -2,18 +2,9 @@
 
 This code contains a comparison between Resnet (trained from scratch) and fine-tuned Vit (Vit and CNN+ViT).
 
-You will need to install : 
-```
-medmnist
-torch
-torchvision
-numpy
-matplotlib
-scikit-learn
-transformers
-wandb
-evaluate
-pillow
+You will need to install libraries.
+```bash
+pip install -r requirements.txt
 ```
 
 Use of CUDA is encouraged.
