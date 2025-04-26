@@ -1,0 +1,432 @@
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.7278178334236145
+  eval_accuracy: 0.71875
+  eval_runtime: 2.912
+  eval_samples_per_second: 164.835
+  eval_steps_per_second: 10.302
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.7458158135414124
+  eval_accuracy: 0.7229166666666667
+  eval_runtime: 2.8976
+  eval_samples_per_second: 165.652
+  eval_steps_per_second: 10.353
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.7156249284744263
+  eval_accuracy: 0.7083333333333334
+  eval_runtime: 2.8942
+  eval_samples_per_second: 165.848
+  eval_steps_per_second: 10.365
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0.1
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.6408130526542664
+  eval_accuracy: 0.7416666666666667
+  eval_runtime: 2.9054
+  eval_samples_per_second: 165.209
+  eval_steps_per_second: 10.326
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0.1
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.6514499187469482
+  eval_accuracy: 0.7541666666666667
+  eval_runtime: 2.8786
+  eval_samples_per_second: 166.749
+  eval_steps_per_second: 10.422
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0.1
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.641711950302124
+  eval_accuracy: 0.7541666666666667
+  eval_runtime: 2.9048
+  eval_samples_per_second: 165.245
+  eval_steps_per_second: 10.328
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0.2
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.6620914340019226
+  eval_accuracy: 0.7395833333333334
+  eval_runtime: 2.9684
+  eval_samples_per_second: 161.704
+  eval_steps_per_second: 10.107
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0.2
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.6560498476028442
+  eval_accuracy: 0.74375
+  eval_runtime: 2.8966
+  eval_samples_per_second: 165.709
+  eval_steps_per_second: 10.357
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.001
+Warmup Ratio: 0.2
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.6416313052177429
+  eval_accuracy: 0.7520833333333333
+  eval_runtime: 2.9383
+  eval_samples_per_second: 163.357
+  eval_steps_per_second: 10.21
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.6627155542373657
+  eval_accuracy: 0.7791666666666667
+  eval_runtime: 2.9825
+  eval_samples_per_second: 160.936
+  eval_steps_per_second: 10.059
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.6628136038780212
+  eval_accuracy: 0.8
+  eval_runtime: 2.9018
+  eval_samples_per_second: 165.412
+  eval_steps_per_second: 10.338
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.6631014347076416
+  eval_accuracy: 0.775
+  eval_runtime: 2.9348
+  eval_samples_per_second: 163.553
+  eval_steps_per_second: 10.222
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0.1
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.6795738339424133
+  eval_accuracy: 0.7979166666666667
+  eval_runtime: 2.8752
+  eval_samples_per_second: 166.944
+  eval_steps_per_second: 10.434
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0.1
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.65886390209198
+  eval_accuracy: 0.7895833333333333
+  eval_runtime: 2.9293
+  eval_samples_per_second: 163.864
+  eval_steps_per_second: 10.242
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0.1
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.6489083766937256
+  eval_accuracy: 0.8020833333333334
+  eval_runtime: 2.8539
+  eval_samples_per_second: 168.191
+  eval_steps_per_second: 10.512
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0.2
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.6459988951683044
+  eval_accuracy: 0.7895833333333333
+  eval_runtime: 2.9494
+  eval_samples_per_second: 162.744
+  eval_steps_per_second: 10.172
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0.2
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.6368483901023865
+  eval_accuracy: 0.79375
+  eval_runtime: 2.9181
+  eval_samples_per_second: 164.489
+  eval_steps_per_second: 10.281
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 0.0001
+Warmup Ratio: 0.2
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.6178503632545471
+  eval_accuracy: 0.7958333333333333
+  eval_runtime: 2.8972
+  eval_samples_per_second: 165.674
+  eval_steps_per_second: 10.355
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.567981481552124
+  eval_accuracy: 0.7833333333333333
+  eval_runtime: 2.8822
+  eval_samples_per_second: 166.54
+  eval_steps_per_second: 10.409
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.5631469488143921
+  eval_accuracy: 0.7833333333333333
+  eval_runtime: 2.9035
+  eval_samples_per_second: 165.317
+  eval_steps_per_second: 10.332
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.55958092212677
+  eval_accuracy: 0.79375
+  eval_runtime: 2.9282
+  eval_samples_per_second: 163.924
+  eval_steps_per_second: 10.245
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0.1
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.5535213351249695
+  eval_accuracy: 0.7875
+  eval_runtime: 2.896
+  eval_samples_per_second: 165.747
+  eval_steps_per_second: 10.359
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0.1
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.5522299408912659
+  eval_accuracy: 0.7958333333333333
+  eval_runtime: 2.9128
+  eval_samples_per_second: 164.789
+  eval_steps_per_second: 10.299
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0.1
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.5449233651161194
+  eval_accuracy: 0.7916666666666666
+  eval_runtime: 2.89
+  eval_samples_per_second: 166.09
+  eval_steps_per_second: 10.381
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0.2
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.5529338717460632
+  eval_accuracy: 0.7833333333333333
+  eval_runtime: 2.9018
+  eval_samples_per_second: 165.412
+  eval_steps_per_second: 10.338
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0.2
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.552612841129303
+  eval_accuracy: 0.7854166666666667
+  eval_runtime: 2.9488
+  eval_samples_per_second: 162.776
+  eval_steps_per_second: 10.174
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 1e-05
+Warmup Ratio: 0.2
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.5497015714645386
+  eval_accuracy: 0.78125
+  eval_runtime: 2.8722
+  eval_samples_per_second: 167.117
+  eval_steps_per_second: 10.445
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.6064280271530151
+  eval_accuracy: 0.8
+  eval_runtime: 2.9038
+  eval_samples_per_second: 165.298
+  eval_steps_per_second: 10.331
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.5835282802581787
+  eval_accuracy: 0.8083333333333333
+  eval_runtime: 2.8935
+  eval_samples_per_second: 165.889
+  eval_steps_per_second: 10.368
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.594607949256897
+  eval_accuracy: 0.80625
+  eval_runtime: 2.8684
+  eval_samples_per_second: 167.342
+  eval_steps_per_second: 10.459
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0.1
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.5801272988319397
+  eval_accuracy: 0.8083333333333333
+  eval_runtime: 2.9015
+  eval_samples_per_second: 165.429
+  eval_steps_per_second: 10.339
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0.1
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.5908759236335754
+  eval_accuracy: 0.7958333333333333
+  eval_runtime: 2.8996
+  eval_samples_per_second: 165.542
+  eval_steps_per_second: 10.346
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0.1
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.5700710415840149
+  eval_accuracy: 0.8083333333333333
+  eval_runtime: 2.9075
+  eval_samples_per_second: 165.088
+  eval_steps_per_second: 10.318
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0.2
+Weight Decay: 0
+Metrics:
+  eval_loss: 0.5832425951957703
+  eval_accuracy: 0.8041666666666667
+  eval_runtime: 2.8937
+  eval_samples_per_second: 165.877
+  eval_steps_per_second: 10.367
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0.2
+Weight Decay: 0.01
+Metrics:
+  eval_loss: 0.5532741546630859
+  eval_accuracy: 0.8166666666666667
+  eval_runtime: 2.9461
+  eval_samples_per_second: 162.925
+  eval_steps_per_second: 10.183
+  epoch: 2.0
+
+---------------------------------
+Learning Rate: 5e-05
+Warmup Ratio: 0.2
+Weight Decay: 0.1
+Metrics:
+  eval_loss: 0.5757089257240295
+  eval_accuracy: 0.7958333333333333
+  eval_runtime: 2.8818
+  eval_samples_per_second: 166.563
+  eval_steps_per_second: 10.41
+  epoch: 2.0
+
