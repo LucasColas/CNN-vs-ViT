@@ -5,11 +5,28 @@ import torchvision.transforms as transforms
 
 
 def ensure_three_channels(img: torch.Tensor) -> torch.Tensor:
+    """
+    Assure que tous les images sont à trois canaux (RGB).
+
+    Args
+    ----
+      img : Image à vérifier
+
+    Output
+    ------
+      img : RGB Image
+    """
     if img.shape[0] == 1:
         img = img.expand(3, img.shape[1], img.shape[2])
     return img
 
 class UpdateLabelsMNSIT(Dataset):
+  """
+  Met à jour les indexes des labels des images pour la concaténation.
+
+  Par exemple, les labels de PathMNIST sont indéxés de 0 à 8 tandis
+  que DermaMNIST de 0 à 6. Donc on shift de 9 tous les labels de Derma. 
+  """
   def __init__(self, dataset, labels_shift):
     self.dataset = dataset
     self.labels_shift = labels_shift
@@ -27,6 +44,10 @@ class UpdateLabelsMNSIT(Dataset):
     return image, label
 
 class AugmentedMNIST(Dataset):
+  """
+  Crée un dataset qui contient toutes les images suite à l'augmentation
+  des données
+  """
   def __init__(self, dataset, augmented_retina_list):
     self.augmented_retina_list = augmented_retina_list
     self.dataset = dataset
@@ -67,6 +88,19 @@ def ApplyTransformation(dataset, transformation):
 
 def DatasetAugmentation(dataset):
 
+  """
+  Définit la séquence de transformation à effectuer
+
+  Args
+  ----
+  dataset : Dataset contenant les images à augmenter
+
+  Output
+  ------
+  augmented_dataset_3 : Dataset avec tous les images originales + transformées
+
+  """
+
   first_transformation = v2.Compose([
       v2.Lambda(lambda img: v2.functional.rotate(img, angle=45.0)),
       v2.ToDtype(torch.float32, scale=True),
@@ -92,11 +126,25 @@ def DatasetAugmentation(dataset):
 
 def ConcatDataset(path_dataset, derma_dataset, blood_dataset, retina_dataset, subset_count):
     """
+    Concaténise un semble de données (Train, Val ou Test) avec les 4 jeux de données MNIST.
+
     e.g. path_dataset = PathMNIST(split="train", download=True)
 
-    For training_dataset, use a subset_count of 1080 (same amount as full retina train dataset)
-    for validation dataset : subset_count = 120
-    for test dataset : subset_count = 400
+    Pour training_dataset, utiliser un subset_count de 1080 (même quantité que les données de train de Retina)
+    Pour validation dataset : subset_count = 120
+    Pour test dataset : subset_count = 400
+
+    Args
+    ----
+    path_dataset : Dataset des images de PathMNIST
+    derma_dataset : Dataset des images de DermaMNIST
+    blood_dataset : Dataset des images de BloodMNIST
+    retina_dataset : Dataset des images de RetinaMNIST
+    subset_count : Quantité des sous-ensembles d'images à garder
+
+    Output
+    ------
+    concat_dataset : Dataset qui concaténie les 4 ensembles de données.
     """
 
     if subset_count not in [120, 400, 1080]:
