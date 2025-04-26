@@ -1,6 +1,6 @@
 # CNN-VS-ViT
 
-This code contains a comparison between Resnet (trained from scratch) and fine-tuned Vit (Vit and CNN+ViT).
+This code contains a comparison between Resnet (trained from scratch) and fine-tuned Vit (Vit and CNN+ViT) on MedMNIST.
 
 You will need to install libraries.
 ```bash
