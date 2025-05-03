@@ -1,16 +1,12 @@
 from medmnist import PathMNIST, DermaMNIST, BloodMNIST, RetinaMNIST
 
-print("import modules")
 
 import os
 import itertools
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.nn.functional as F
 from torch.utils.data import DataLoader, random_split
-import torchvision.transforms as transforms
-from torchvision.transforms import v2
 import numpy as np
 import matplotlib.pyplot as plt
 import json
@@ -31,12 +27,8 @@ derma_dataset = DermaMNIST(split="train", download=False, as_rgb = True)
 blood_dataset = BloodMNIST(split="train", download=False, as_rgb = True)
 retina_dataset = RetinaMNIST(split="train", download=False, as_rgb= True) 
 
-os.makedirs("saved_models_2", exist_ok=True)
-os.makedirs("plots_2", exist_ok=True)
-os.makedirs("models_2", exist_ok=True)
-
-# Download datasets using MedMNIST.
-#print("Downloading datasets...")
+os.makedirs("saved_models", exist_ok=True)
+os.makedirs("plots", exist_ok=True)
 
 
 # Concatenate and augment datasets

@@ -1,17 +1,6 @@
 
 import torch
 import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-import torchvision.transforms as transforms
-import torchvision
-from torch.utils.data import DataLoader, TensorDataset
-import matplotlib.pyplot as plt
-import numpy as np
-from medmnist import OCTMNIST  # Import the OCTMNIST dataset
-import wandb
-from sklearn.metrics import confusion_matrix
-from PIL import Image
 
 
 
