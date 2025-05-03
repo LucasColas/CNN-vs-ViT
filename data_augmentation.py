@@ -5,6 +5,17 @@ import torchvision.transforms as transforms
 
 
 def ensure_three_channels(img: torch.Tensor) -> torch.Tensor:
+    """
+    Assure que tous les images sont à trois canaux (RGB).
+
+    Args
+    ----
+      img : Image à vérifier
+
+    Output
+    ------
+      img : RGB Image
+    """
     if img.shape[0] == 1:
         img = img.expand(3, img.shape[1], img.shape[2])
     return img
@@ -33,6 +44,10 @@ class UpdateLabelsMNSIT(Dataset):
     return image, label
 
 class AugmentedMNIST(Dataset):
+  """
+  Crée un dataset qui contient toutes les images suite à l'augmentation
+  des données
+  """
   def __init__(self, dataset, augmented_retina_list):
     # Store the original dataset and the augmented dataset
     self.augmented_retina_list = augmented_retina_list
@@ -76,6 +91,19 @@ def ApplyTransformation(dataset, transformation):
 
 def DatasetAugmentation(dataset):
 
+  """
+  Définit la séquence de transformation à effectuer
+
+  Args
+  ----
+  dataset : Dataset contenant les images à augmenter
+
+  Output
+  ------
+  augmented_dataset_3 : Dataset avec tous les images originales + transformées
+
+  """
+
   # Rotate the image by 45 degrees
   first_transformation = v2.Compose([
       v2.Lambda(lambda img: v2.functional.rotate(img, angle=45.0)),
@@ -104,9 +132,16 @@ def DatasetAugmentation(dataset):
 
 def ConcatDataset(path_dataset, derma_dataset, blood_dataset, retina_dataset, subset_count):
     """
-    Concatenate the datasets and update the labels for the derma, blood, and retina datasets.
+    e.g. path_dataset = PathMNIST(split="train", download=True)
+
+    For training_dataset, use a subset_count of 1080 (same amount as full retina train dataset)
+    for validation dataset : subset_count = 120
+    for test dataset : subset_count = 400
     """
 
+    if subset_count not in [120, 400, 1080]:
+      raise ValueError(f"subset_count must be 120, 400, or 1080. Got {subset_count} instead.")
+    
     subset_tensor=torch.arange(subset_count).tolist()
 
     DERMA_LABELS_SHIFT = 9
